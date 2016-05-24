@@ -13,12 +13,8 @@ var User = require('../models/user');
 router.route('/')
     .get((req, res) => {
       Bid.find({}, (err, bids) => {
-          if(err) {
-            res.status(400).send(err);
-          } else {
-            res.send(bids);
-          }
-        });
+        res.status(err ? 400 : 200).send(err || bids);
+      });
     })
     .post((req, res) => {
       var bid = new Bid(req.body);
@@ -42,13 +38,13 @@ router.route('/')
   });
 
   router.post('/addBid', (req, res) => {
-      var bid = new Bid(req.body);
-
-      console.log('req.body', bid);
-
-      bid.save((err, savedBid) => {
-        res.status(err ? 400 : 200).send(err);
-      });
+    Bid.create(req.body, (err, bid) => {
+      res.status(err ? 400 : 200).send(err || bid);
+    });
+    // var bid = new Bid(req.body);
+    // bid.save((err, savedBid) => {
+    //   res.status(err ? 400 : 200).send(err);
+    // });
   });
 
 module.exports = router;

@@ -129,30 +129,36 @@ app.controller('authFormCtrl', function($scope, $state, $auth) {
 //   }
 // });
 //
-app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve, SimpleEBayService, $rootScope) {
-// app.controller('quotesCtrl', function($scope, $state) {
-
-  console.log('quotesCtrl');
+app.controller('quotesCtrl', function($scope, $state, Payment, SimpleEBayResolve, SimpleEBayService, $rootScope) {
 
   SimpleEBayService.getItemAll().then(function (result) {
-
-      // $scope.items = data;
       $scope.bids = result.data;
-
-      console.log(result.data);
   });
 
-  // $scope.items = SimpleEBayResolve;
-  // $scope.addBidding = function(newBid, itemID) {
-  //
-  //     newBid.itemref = itemID;
-  //     SimpleEBayService.addBid(newBid);
-  // };
-  //
-  // SimpleEBayService.getBidAll().then(function (data) {
-  //
-  //     console.log(data);
-  //     $scope.bids = data;
-  // });
 
+  $scope.doCheckout = function(token) {
+     Payment.completeCheckout(token, $scope.selectedBidId)
+       .then(res => {
+         console.log('res:', res);
+       });
+   }
+
+  $scope.selectBid = function(id) {
+   $scope.selectedBidId = id;
+ };
+
+});
+
+
+
+app.service('Payment', function($http) {
+  this.completeCheckout = function(token, bidId) {
+    return $http.post('/api/payment', { token: token, bidId: bidId });
+  };
+});
+
+app.service('Bid', function($http) {
+  this.getAll = () => {
+    return $http.get('/api/bids');
+  };
 });

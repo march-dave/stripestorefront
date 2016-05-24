@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('authApp', ['ui.router', 'satellizer']);
+var app = angular.module('authApp', ['ui.router', 'satellizer', 'stripe.checkout']);
 
 // app.run(function(Auth) {
 //   Auth.getProfile();

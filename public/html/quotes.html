@@ -81,6 +81,7 @@
       <th>Bidder</th>
       <th>Bid Amount</th>
       <th>Bid Time</th>
+      <th>Buy Now!</th>
   </tr></thead>
   <tbody>
     <tr ng-repeat='bid in bids'>
@@ -102,6 +103,16 @@
         <!-- {{ bid.biddingTime }} -->
         {{ bid.biddingTime }}
       </td>
+      <td>
+            <button ng-click='selectBid(bid._id)'
+                    stripe-checkout="doCheckout"
+                    data-key= 'pk_test_tU56gwscooOPPJx1IsrPwrfg'
+                    data-name="Best Auction Item"
+                    data-description="{{bid.variety}}"
+                    data-amount="{{100}}">
+              Buy
+            </button>
+          </td>
     </tr>
     <!-- <tr>
       <td>
