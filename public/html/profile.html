@@ -1,0 +1,22 @@
+<h1>Profile</h1>
+
+<div ng-if='loading'><h2>
+  LOADING
+  {{user.fullName}}
+  {{user.email}}
+</h2></div>
+
+<button class='btn btn-lg' ng-click='edit()'>EDIT!</button>
+
+
+<form ng-show='editing'>
+
+  <!-- <div class="form-group"><lable>Id</lable> <input type="text" ng-model='editUser._id' class='form-control' ></div> -->
+  <div class="form-group"><lable>First Name</lable> <input type="text" ng-model='editUser.firstname' class='form-control' ></div>
+  <div class="form-group"><lable>Middle Name</lable> <input type="text" ng-model='editUser.middlename' class='form-control'></div>
+  <div class="form-group"><lable>Last Name</lable> <input type="text" ng-model='editUser.lastname' class='form-control'></div>
+
+  <button class='btn' ng-click='cancelEdit()'>Cancel</button>
+  <button class="btn">Save</button>
+
+</form>
