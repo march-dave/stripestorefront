@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
       return res.status(400).send(err || { error: 'Bid not found.' })
     }
 
-    brd.purchase(token, (err, charge) => {
+    bid.purchase(token, (err, charge) => {
       if(err) return res.status(400).send(err);
       console.log('charge:', charge);
 

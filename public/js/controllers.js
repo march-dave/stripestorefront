@@ -137,6 +137,10 @@ app.controller('quotesCtrl', function($scope, $state, Payment, SimpleEBayResolve
 
 
   $scope.doCheckout = function(token) {
+
+    console.log('toke : ', token);
+    console.log('selectedBidId :', $scope.selectedBidId);
+
      Payment.completeCheckout(token, $scope.selectedBidId)
        .then(res => {
          console.log('res:', res);
