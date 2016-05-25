@@ -7,19 +7,31 @@ var Bid = require('../models/bid');
 router.post('/', (req, res) => {
 
   var token = req.body.token;
-  var bidId = req.body.bidId;
+  // var bidId = req.body.bidId;
+  var bidId = '574395cb31b8e1d4045cb683';
+
+  console.log('bidId', bidId);
 
   Bid.findById(bidId, (err, bid) => {
+
+    // console.log('Router token', typeof token);
+    console.log('bid', bid);
+
     if(err || !bid) {
       return res.status(400).send(err || { error: 'Bid not found.' })
     }
 
-    bid.purchase(token, (err, charge) => {
-      if(err) return res.status(400).send(err);
-      console.log('charge:', charge);
+    // console.log('bid', bid);
+    // console.log('token', token);
 
-      res.send(charge);
+    bid.purchase(token, (err, charge) => {
+      console.log('charge:', charge);
+      // if(err) return res.status(400).send(err);
+
+      // res.send(charge);
     });
+
+
   });
 });
 

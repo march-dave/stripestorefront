@@ -12,11 +12,15 @@ var bidSchema = new mongoose.Schema({
 });
 
 bidSchema.methods.purchase = function(token, cb) {
+
+  // console.log('token.id', token.id);
+
   stripe.charges.create({
     amount: this.value * 100,
     currency: "usd",
     source: token.id, // obtained with Stripe.js
-    description: `Charge for ${token.email}: ${this.variety}`
+    description: "description field"
+    // description: `Charge for ${token.email}: ${this.variety}`
   }, cb);
 };
 

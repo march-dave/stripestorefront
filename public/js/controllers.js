@@ -7,7 +7,6 @@ app.controller('profileCtrl', function() {
 });
 
 app.controller('mainCtrl', function($scope, $state, $auth) {
-
   $scope.logout = () => {
     $auth.logout();
   }
@@ -15,14 +14,11 @@ app.controller('mainCtrl', function($scope, $state, $auth) {
   $scope.isAuthenticated = () => {
     return $auth.isAuthenticated();
   }
-
 });
 
 app.controller('homeCtrl', function($scope) {
   console.log('homeCtrl!');
 });
-
-
 
 app.controller('authFormCtrl', function($scope, $state, $auth) {
   console.log('authFormCtrl!');
@@ -135,11 +131,7 @@ app.controller('quotesCtrl', function($scope, $state, Payment, SimpleEBayResolve
       $scope.bids = result.data;
   });
 
-
   $scope.doCheckout = function(token) {
-
-    console.log('toke : ', token);
-    console.log('selectedBidId :', $scope.selectedBidId);
 
      Payment.completeCheckout(token, $scope.selectedBidId)
        .then(res => {
@@ -152,8 +144,6 @@ app.controller('quotesCtrl', function($scope, $state, Payment, SimpleEBayResolve
  };
 
 });
-
-
 
 app.service('Payment', function($http) {
   this.completeCheckout = function(token, bidId) {
